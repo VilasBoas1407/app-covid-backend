@@ -1,6 +1,5 @@
 var LoginModel = require('../Models/LoginModel');
-require("dotenv-safe").config();
-var jwt = require('jsonwebtoken');
+var Auth = require('../Utils/Auth');
 
 var LoginController = {
 
@@ -12,10 +11,7 @@ var LoginController = {
             const user = await LoginModel.doLogin(ds_email,ds_senha);
 
             if(user != null){
-                var id = user.id_usuario;
-                var token = jwt.sign({ id }, process.env.SECRET, {
-                    expiresIn: 300 // expires in 5min
-                  });
+                var token = await  Auth.generateToken(user.id_usuario)
 
                   return res.status(200).send({
                     'userData': user,
