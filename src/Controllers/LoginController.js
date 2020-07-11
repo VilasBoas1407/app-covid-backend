@@ -1,6 +1,5 @@
 var LoginModel = require('../Models/LoginModel');
 var Auth = require('../Utils/Auth');
-const { loginCompany } = require('../Models/LoginModel');
 
 var LoginController = {
 
@@ -33,7 +32,7 @@ var LoginController = {
             });
         }
     },
-    async loginCompany(req,res) {
+    async LoginCompany(req,res) {
         
         try{
             const {ds_email, ds_senha } = req.body;
