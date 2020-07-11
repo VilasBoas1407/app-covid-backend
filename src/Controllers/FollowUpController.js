@@ -1,17 +1,17 @@
-var UserModel = require('../Models/UserModel');
+var FollowModel = require('../Models/FollowUpModel');
 var Auth = require('../Utils/Auth');
 
-var UserController = {
+var FollowUpController = {
 
-    async GetUsers(req,res) {
-        
+    async GetFollowUp(req,res) {
+
         try{
             var token = req.headers['x-access-token'];
             
             var auth = await Auth.validateToken(token);
-            
+
             if(auth.valid){
-                const user = await UserModel.getUsers();
+                const user = await FollowModel.getFollowUp();
                 
                 if(user != null){
                       return res.status(200).send({
@@ -20,7 +20,7 @@ var UserController = {
                 }
                 else{
                     return res.status(200).send({
-                        'message':'Não foram encontrados usuários!'
+                        'message':'Não foram encontrados registros!'
                     });
                 }
             }
@@ -37,20 +37,7 @@ var UserController = {
             });
         }
     },
-    async PostUsers(req,res) {
-
-        try{
-            
-            await UserModel.postUsers(req,res);  
-
-        }
-        catch(err){
-            return res.status(500).send({
-                'error' : err
-            });
-        }
-    },
-    async PutUsers(req,res) {
+    async PostFollowUp(req,res) {
 
         try{
             var token = req.headers['x-access-token'];
@@ -58,8 +45,7 @@ var UserController = {
             var auth = await Auth.validateToken(token);
 
             if(auth.valid){
-               
-                await UserModel.putUsers(req,res);
+                await FollowModel.postFollowUp(req,res);
                 
             }
             else{
@@ -78,4 +64,4 @@ var UserController = {
 
 };
 
-module.exports = UserController;
+module.exports = FollowUpController;

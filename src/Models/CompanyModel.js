@@ -1,14 +1,13 @@
 const options = require('../database/knex-options');
 const knex = require('knex')(options);
 
-var UserModel = {
-
-     async getUsers(){
+var CompanyModel = {
+    async getCompany(){
         try{
             var users = {};
 
-            await knex('tb_usuario')
-            .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone')
+            await knex('tb_empresa')
+            .select('id_emp', 'ds_nome','ds_cnpj','ds_email','dt_cadastro', 'ds_telefone')
             .then(function(res){
                 if(res.length >= 1)
                     users = res;
@@ -22,27 +21,24 @@ var UserModel = {
             throw ex;
         }
     },
-    async postUsers(req, res){
+    async postCompany(req, res){
         try{
             //const { user } = req.body
-            
-            await knex('tb_usuario').insert(
+            await knex('tb_empresa').insert(
                 req.body
             )
             return res.status(201).send()
         } catch (error){
-            
             throw error
         }
     },
-    async putUsers(req,res){
+    async putCompany(req,res){
         try{
             //const { user } = req.body
-            const { id } = req.params
-            
-            //console.log(req.params)
-            await knex('tb_usuario')
-            .update( req.body )
+            //const { id } = req.params
+
+            await knex('tb_empresa')
+            .update(req.body)
             .where(req.query)
 
             return res.send()
@@ -50,6 +46,6 @@ var UserModel = {
             throw error
         }
     }
-}
 
-module.exports = UserModel;
+}
+module.exports = CompanyModel;

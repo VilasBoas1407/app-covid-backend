@@ -4,6 +4,7 @@ const knex = require('knex')(options);
 var LoginModel = {
 
      async doLogin(ds_email,ds_senha){
+        console.log(ds_email)
         try{
             var user = {};
 

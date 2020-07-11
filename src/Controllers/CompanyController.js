@@ -1,17 +1,18 @@
-var UserModel = require('../Models/UserModel');
+var CompanyModel = require('../Models/CompanyModel');
 var Auth = require('../Utils/Auth');
+const { PutCompany, getCompany } = require('../Models/CompanyModel');
 
 var UserController = {
 
-    async GetUsers(req,res) {
-        
+    async GetCompany(req,res) {
+
         try{
             var token = req.headers['x-access-token'];
             
             var auth = await Auth.validateToken(token);
-            
+
             if(auth.valid){
-                const user = await UserModel.getUsers();
+                const user = await CompanyModel.getCompany();
                 
                 if(user != null){
                       return res.status(200).send({
@@ -37,11 +38,22 @@ var UserController = {
             });
         }
     },
-    async PostUsers(req,res) {
+    async PostCompany(req,res) {
 
         try{
+            var token = req.headers['x-access-token'];
             
-            await UserModel.postUsers(req,res);  
+            var auth = await Auth.validateToken(token);
+
+            if(auth.valid){
+                await CompanyModel.postCompany(req,res);
+                
+            }
+            else{
+                return res.status(auth.status_code).send({
+                    'message': auth.message
+                });
+            }
 
         }
         catch(err){
@@ -50,7 +62,7 @@ var UserController = {
             });
         }
     },
-    async PutUsers(req,res) {
+    async PutCompany(req,res) {
 
         try{
             var token = req.headers['x-access-token'];
@@ -58,8 +70,7 @@ var UserController = {
             var auth = await Auth.validateToken(token);
 
             if(auth.valid){
-               
-                await UserModel.putUsers(req,res);
+                await CompanyModel.putCompany(req,res);
                 
             }
             else{

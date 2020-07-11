@@ -10,7 +10,7 @@ const routes = require('./routes');
 //configurando o body parser para pegar POSTS mais tarde
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
-
+//app.use(express.json)
 app.use(routes);
 
 //inicia o servidor

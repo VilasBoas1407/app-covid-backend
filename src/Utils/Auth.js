@@ -6,7 +6,7 @@ var Auth = {
     async generateToken(id){
 
         var token = await jwt.sign({ id }, process.env.SECRET, {
-            expiresIn: 600 // expires in 5min
+            expiresIn: 30000 // expires in 5min
         });
 
         return token;
