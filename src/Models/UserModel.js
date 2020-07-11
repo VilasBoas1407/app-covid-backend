@@ -3,11 +3,12 @@ const knex = require('knex')(options);
 
 var UserModel = {
 
-     async getUsers(){
+     async getUsers(req,res){
         try{
             var users = {};
 
             await knex('tb_usuario')
+            .where(req.query)
             .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone')
             .then(function(res){
                 if(res.length >= 1)

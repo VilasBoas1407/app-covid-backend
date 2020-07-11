@@ -16,11 +16,10 @@ routes.put('/users',UserController.PutUsers);
 
 routes.get('/companies',CompanyController.GetCompany);
 routes.post('/companies',CompanyController.PostCompany);
-routes.get('/companies/:id',CompanyController.GetCompany);
-routes.put('/companies/:id',CompanyController.PutCompany);
+routes.put('/companies',CompanyController.PutCompany);
 
-routes.get('/followup/:id',FollowUpController.GetFollowUp);
-routes.post('/followup/:id',FollowUpController.PostFollowUp);
+routes.get('/followup',FollowUpController.GetFollowUp);
+routes.post('/followup',FollowUpController.PostFollowUp);
 
 
 

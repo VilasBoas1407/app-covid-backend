@@ -6,6 +6,7 @@ var FollowUpModel = {
         try{
             var users = {};
             //const { id } = req.params
+        
             await knex('tb_acompanhamento')
             .select().where(req.query)
             .then(function(res){

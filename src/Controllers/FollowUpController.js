@@ -11,7 +11,7 @@ var FollowUpController = {
             var auth = await Auth.validateToken(token);
 
             if(auth.valid){
-                const user = await FollowModel.getFollowUp();
+                const user = await FollowModel.getFollowUp(req,res);
                 
                 if(user != null){
                       return res.status(200).send({

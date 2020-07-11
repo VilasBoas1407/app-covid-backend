@@ -11,7 +11,7 @@ var UserController = {
             var auth = await Auth.validateToken(token);
             
             if(auth.valid){
-                const user = await UserModel.getUsers();
+                const user = await UserModel.getUsers(req,res);
                 
                 if(user != null){
                       return res.status(200).send({
