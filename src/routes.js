@@ -7,7 +7,7 @@ const FollowUpController = require('./Controllers/FollowUpController')
 const routes = Router();
 
 
-routes.get('/user', LoginController.LoginUser);
+routes.post('/user', LoginController.LoginUser);
 routes.get('/company',LoginController.LoginCompany);
 
 routes.get('/users',UserController.GetUsers);

@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();         
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const port = 3000; //porta padrão
 require("dotenv-safe").config();
@@ -10,7 +11,9 @@ const routes = require('./routes');
 //configurando o body parser para pegar POSTS mais tarde
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
-//app.use(express.json)
+//Adicionando cors para permitir requisições externas
+app.use(cors());
+
 app.use(routes);
 
 //inicia o servidor
