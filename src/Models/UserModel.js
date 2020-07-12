@@ -23,18 +23,19 @@ var UserModel = {
             throw ex;
         }
     },
-    async postUsers(req, res){
-        try{
-            //const { user } = req.body
-            
+    async postUsers(userData){
+
+            let valid = false;     
+
             await knex('tb_usuario').insert(
-                req.body
-            )
-            return res.status(201).send()
-        } catch (error){
-            
-            throw error
-        }
+                userData
+            ).then(function(res) {
+                valid = true;
+            }).catch(function(err) {
+                throw err;
+            });
+
+            return valid;
     },
     async putUsers(req,res){
         try{
@@ -49,6 +50,28 @@ var UserModel = {
             return res.send()
         } catch (error){
             throw error
+        }
+    },
+    async validEmail(ds_email){
+        try{
+            var email = {};
+
+            await knex('tb_usuario')
+            .select('ds_email')
+            .where({
+                ds_email: ds_email,
+            })
+            .then(function(res){
+                if(res.length >= 1)
+                    email = res;
+                else
+                    email = null;
+            });
+            
+            return email;
+        }
+        catch(ex){
+            throw ex;
         }
     }
 }

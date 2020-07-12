@@ -50,7 +50,7 @@ var LoginModel = {
         catch(ex){
             throw ex;
         }
-    }
+    },
     
 }
 
