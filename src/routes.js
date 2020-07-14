@@ -8,7 +8,7 @@ const routes = Router();
 
 
 routes.post('/user', LoginController.LoginUser);
-routes.get('/company',LoginController.LoginCompany);
+routes.post('/company',LoginController.LoginCompany);
 
 routes.get('/users',UserController.GetUsers);
 routes.post('/users',UserController.PostUsers);
