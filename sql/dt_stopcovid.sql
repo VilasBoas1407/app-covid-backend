@@ -26,7 +26,9 @@ CREATE TABLE `tb_acompanhamento` (
   `id_usuario` varchar(10) DEFAULT NULL,
   `id_sintoma` varchar(100) DEFAULT NULL,
   `dt_consulta` datetime DEFAULT CURRENT_TIMESTAMP,
-  `ds_epi` varchar(10) DEFAULT NULL
+  `ds_epi` tinyint(1) DEFAULT '0',
+  `ds_possui_epi` tinyint(1) DEFAULT '0',
+  `ds_usa_epi` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -36,7 +38,7 @@ CREATE TABLE `tb_acompanhamento` (
 
 LOCK TABLES `tb_acompanhamento` WRITE;
 /*!40000 ALTER TABLE `tb_acompanhamento` DISABLE KEYS */;
-INSERT INTO `tb_acompanhamento` VALUES ('10000','1,5,6,7,3','2020-07-07 16:43:40',NULL),('10100','1,5,3','2020-07-07 16:44:35',NULL),('10101','1,5,3,4','2020-07-07 17:18:49',NULL),('10101','1,5','2020-07-07 17:19:04',NULL),('10100','1','2020-07-07 17:19:09',NULL),('10100','1,2,3','2020-07-11 19:19:19',NULL);
+INSERT INTO `tb_acompanhamento` VALUES ('10000','1,5,6,7,3','2020-07-07 16:43:40',NULL,0,0),('10100','1,5,3','2020-07-07 16:44:35',NULL,0,0),('10101','1,5,3,4','2020-07-07 17:18:49',NULL,0,0),('10101','1,5','2020-07-07 17:19:04',NULL,0,0),('10100','1','2020-07-07 17:19:09',NULL,0,0),('10100','1,2,3','2020-07-11 19:19:19',NULL,0,0);
 /*!40000 ALTER TABLE `tb_acompanhamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-13 18:12:49
+-- Dump completed on 2020-07-13 21:31:52
