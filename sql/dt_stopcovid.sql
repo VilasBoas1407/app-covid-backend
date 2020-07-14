@@ -28,7 +28,8 @@ CREATE TABLE `tb_acompanhamento` (
   `dt_consulta` datetime DEFAULT CURRENT_TIMESTAMP,
   `ds_epi` tinyint(1) DEFAULT '0',
   `ds_possui_epi` tinyint(1) DEFAULT '0',
-  `ds_usa_epi` tinyint(1) DEFAULT '0'
+  `ds_usa_epi` tinyint(1) DEFAULT '0',
+  `dt_data` date GENERATED ALWAYS AS (cast(`dt_consulta` as date)) VIRTUAL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +39,7 @@ CREATE TABLE `tb_acompanhamento` (
 
 LOCK TABLES `tb_acompanhamento` WRITE;
 /*!40000 ALTER TABLE `tb_acompanhamento` DISABLE KEYS */;
-INSERT INTO `tb_acompanhamento` VALUES ('10000','1,5,6,7,3','2020-07-07 16:43:40',NULL,0,0),('10100','1,5,3','2020-07-07 16:44:35',NULL,0,0),('10101','1,5,3,4','2020-07-07 17:18:49',NULL,0,0),('10101','1,5','2020-07-07 17:19:04',NULL,0,0),('10100','1','2020-07-07 17:19:09',NULL,0,0),('10100','1,2,3','2020-07-11 19:19:19',NULL,0,0);
+INSERT INTO `tb_acompanhamento` (`id_usuario`, `id_sintoma`, `dt_consulta`, `ds_epi`, `ds_possui_epi`, `ds_usa_epi`) VALUES ('10100','Tosse, Febre','2020-07-14 12:48:36',1,1,1),('10101','Dores no corpo','2020-07-14 12:50:14',1,1,1),('10014','Dor de cabeça, Dificuldade de respirar','2020-07-14 12:51:33',1,1,1),('10065','','2020-07-14 13:43:24',1,1,1),('10067','Febre','2020-07-14 13:44:40',1,1,1);
 /*!40000 ALTER TABLE `tb_acompanhamento` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-13 21:31:52
+-- Dump completed on 2020-07-14 20:07:32
