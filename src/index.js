@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();         
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const port = 3000; //porta padrão
+const port = 3001; //porta padrão
 require("dotenv-safe").config();
 var jwt = require('jsonwebtoken');
 
