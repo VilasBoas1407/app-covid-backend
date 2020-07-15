@@ -60,8 +60,7 @@ var FollowUpController = {
                 'error' : err
             });
         }
-    }
-
+    },
 };
 
 module.exports = FollowUpController;

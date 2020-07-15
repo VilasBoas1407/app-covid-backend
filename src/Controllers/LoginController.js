@@ -19,7 +19,8 @@ var LoginController = {
                       return res.status(200).send({
                         'userData': user,
                         'auth': true,
-                        'token' : token
+                        'token' : token,
+                        'loginUser': true
                         });
                 }
                    
@@ -55,7 +56,8 @@ var LoginController = {
                   return res.status(200).send({
                     'userData': user,
                     'auth': true,
-                    'token' : token
+                    'token' : token,
+                    'loginUser': false
                     });
             }
                
@@ -70,6 +72,13 @@ var LoginController = {
                 'error' : err
             });
         }
+    },
+    async validateToken(req,res){
+        const { token } = req.params;
+
+        var auth = await Auth.validateToken(token);
+
+        return res.status(200).send(auth);
     }
 
 };

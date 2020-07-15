@@ -1,3 +1,4 @@
 #Ignora a pasta node_modules
 node_modules
 database
+src/database/knex-options.js
