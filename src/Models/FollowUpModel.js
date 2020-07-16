@@ -8,7 +8,9 @@ var FollowUpModel = {
             //const { id } = req.params
         
             await knex('tb_acompanhamento')
-            .select('tb_acompanhamento.id_usuario','id_sintoma','dt_data','ds_nome','ds_telefone').leftJoin('tb_usuario','tb_acompanhamento.id_usuario','tb_usuario.id_usuario').where(req.query)
+            .select('tb_acompanhamento.id_usuario','dt_data','ds_nome','id_sintoma','ds_telefone', 'ds_usa_epi')
+            .leftJoin('tb_usuario','tb_acompanhamento.id_usuario','tb_usuario.id_usuario')
+            .where(req.query).orderByRaw(' dt_data desc, length(id_sintoma) desc')
             .then(function(res){
                 if(res.length >= 1)
                     users = res;
