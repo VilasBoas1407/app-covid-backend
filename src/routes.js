@@ -14,6 +14,7 @@ routes.post('/company',LoginController.LoginCompany);
 routes.get('/users',UserController.GetUsers);
 routes.post('/users',UserController.PostUsers);
 routes.put('/users',UserController.PutUsers);
+routes.get('/lastAnswer',UserController.getLastAnswer);
 
 routes.get('/companies',CompanyController.GetCompany);
 routes.post('/companies',CompanyController.PostCompany);

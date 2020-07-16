@@ -79,8 +79,7 @@ var LoginController = {
         var auth = await Auth.validateToken(token);
 
         return res.status(200).send(auth);
-    }
-
+    },
 };
 
 module.exports = LoginController;

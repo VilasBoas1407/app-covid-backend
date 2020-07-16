@@ -73,6 +73,30 @@ var UserModel = {
         catch(ex){
             throw ex;
         }
+    },
+    async getLastAnswer(id_usuario,data){
+        try{
+            var answer = {};
+
+            await knex('tb_acompanhamento')
+            .select()
+            .where({
+                id_usuario: id_usuario,
+            })
+            .orderBy('dt_consulta', 'desc')
+            .limit(1)
+            .then(function(res){
+                if(res.length >= 1)
+                    answer = res;
+                else
+                    answer = null;
+
+            });
+            return answer;
+        }
+        catch(err){
+            throw err;
+        }
     }
 }
 
