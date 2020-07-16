@@ -29,24 +29,42 @@ var UserController = {
     async PostCompany(req,res) {
 
         try{
-            var token = req.headers['x-access-token'];
             
-            var auth = await Auth.validateToken(token);
+            const companyData = req.body.companyData;
 
-            if(auth.valid){
-                await CompanyModel.postCompany(req,res);
+            console.log(companyData);
+
+            const validEmail = await CompanyModel.validEmail(companyData.ds_email);
+            
+            if(!validEmail){
                 
+                var company = await CompanyModel.postCompany(companyData);
+                console.log(company)
+                if(company){
+                    return res.status(200).send({
+                        'valid':true,
+                        'message': 'Empresa cadastrada com sucesso!'
+                    });
+                }
+                else{
+                    return res.status(500).send({
+                        'valid' : false,
+                        'message' : 'Ocorreu um erro ao cadastrar a empresa!'
+                    });
+                }
             }
             else{
-                return res.status(auth.status_code).send({
-                    'message': auth.message
-                });
+                return res.status(200).send({
+                    'valid' : false,
+                    'message' : 'E-mail já cadastrado!'
+                })
             }
 
         }
         catch(err){
             return res.status(500).send({
-                'error' : err
+                'valid' : false,
+                'message' : 'Ocorreu um erro interno!' + err
             });
         }
     },

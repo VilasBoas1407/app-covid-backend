@@ -21,15 +21,24 @@ var CompanyModel = {
             throw ex;
         }
     },
-    async postCompany(req, res){
+    async postCompany(company){
         try{
-            //const { user } = req.body
+
+            let valid = false;
+
             await knex('tb_empresa').insert(
-                req.body
-            )
-            return res.status(201).send()
+                company
+            ).then(function(res){
+                 valid = true
+            })
+            .catch(function(err){
+                throw error;
+            });
+            
+            return valid;
+
         } catch (error){
-            throw error
+            throw error;
         }
     },
     async putCompany(req,res){
@@ -44,6 +53,28 @@ var CompanyModel = {
             return res.send()
         } catch (error){
             throw error
+        }
+    },
+    async validEmail(ds_email){
+        try{
+            var email = {};
+
+            await knex('tb_empresa')
+            .select('ds_email')
+            .where({
+                ds_email: ds_email,
+            })
+            .then(function(res){
+                if(res.length >= 1)
+                    email = res;
+                else
+                    email = null;
+            });
+            
+            return email;
+        }
+        catch(ex){
+            throw ex;
         }
     }
 
