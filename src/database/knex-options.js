@@ -1,10 +1,10 @@
 const options = {
     client: 'mysql',
     connection: {
-        host     : 'localhost',
-        port     : 3306,
-        user     : 'root',
-        password : 'rootqwer4321',
+        host     : 'mysql669.umbler.com',
+        port     : 41890,
+        user     : 'stop_covid',
+        password : 'Abrasel2020',
         database : 'dt_stopcovid'
     }
 }

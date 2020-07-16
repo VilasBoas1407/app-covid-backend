@@ -32,14 +32,12 @@ var UserController = {
             
             const companyData = req.body.companyData;
 
-            console.log(companyData);
 
             const validEmail = await CompanyModel.validEmail(companyData.ds_email);
             
             if(!validEmail){
                 
                 var company = await CompanyModel.postCompany(companyData);
-                console.log(company)
                 if(company){
                     return res.status(200).send({
                         'valid':true,

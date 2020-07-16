@@ -28,8 +28,7 @@ CREATE TABLE `tb_acompanhamento` (
   `dt_consulta` datetime DEFAULT CURRENT_TIMESTAMP,
   `ds_epi` tinyint(1) DEFAULT '0',
   `ds_possui_epi` tinyint(1) DEFAULT '0',
-  `ds_usa_epi` tinyint(1) DEFAULT '0',
-  `dt_data` date GENERATED ALWAYS AS (cast(`dt_consulta` as date)) VIRTUAL
+  `ds_usa_epi` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
