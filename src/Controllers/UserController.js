@@ -44,8 +44,6 @@ var UserController = {
             
             const userData = req.body.userData;
 
-            console.log(userData);
-
             const validEmail = await UserModel.validEmail(userData.ds_email);
             
             if(!validEmail){
@@ -99,13 +97,13 @@ var UserController = {
             var auth = await Auth.validateToken(token);
             
             if(auth.valid){
-                var Data = new Date().toLocaleDateString();
+                var Data =  new Date().toLocaleDateString().split('/').reverse().join('-');
                
                 const answer = await UserModel.getLastAnswer(idUser,Data);
                
                 if(answer != null){
 
-                    const lastAnswer = new Date(answer[0].dt_data).toLocaleDateString();
+                    const lastAnswer = answer[0].dt_consulta;
                     
                     if(lastAnswer === Data){
                         return res.status(200).send({

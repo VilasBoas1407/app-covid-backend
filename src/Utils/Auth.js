@@ -22,7 +22,6 @@ var Auth = {
         }
         
        jwt.verify(token, process.env.SECRET, function(err, decoded) {
-           console.log(err)
             if (err){
                 data.status_code = 500;
                 data.valid = false;
@@ -32,7 +31,6 @@ var Auth = {
                 data.status_code = 200;
                 data.valid = true;
             }
-            
             return data;
         });
         return data;
