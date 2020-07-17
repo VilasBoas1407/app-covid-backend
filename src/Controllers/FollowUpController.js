@@ -43,9 +43,22 @@ var FollowUpController = {
             var token = req.headers['x-access-token'];
             
             var auth = await Auth.validateToken(token);
+            const followUp = req.body.followUp;
 
             if(auth.valid){
-                await FollowModel.postFollowUp(req,res);
+                const status = await FollowModel.postFollowUp(followUp);
+                if(status){
+                    return res.status(200).send({
+                        'valid' : true,
+                        'message': 'Respostas cadastradas com sucesso!'
+                    });
+                }
+                else{
+                    return res.status(200).send({
+                        'valid' : false,
+                        'message': 'Ocorreu um erro ao cadastrar as respostas!'
+                    });
+                }
                 
             }
             else{

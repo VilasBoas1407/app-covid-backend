@@ -24,16 +24,22 @@ var FollowUpModel = {
             throw ex;
         }
     },
-    async postFollowUp(req, res){
+    async postFollowUp(followup){
         try{
-            const { user } = req.body
+            var valid = false
             await knex('tb_acompanhamento').insert(
-                req.body
-            )
-            return res.status(201).send()
+                followup
+            ).then(function(res){
+                return valid = true;
+            })
+            .catch(function(err){
+                return valid;
+            })
+
         } catch (error){
             throw error
         }
+        return valid;
     }
 
 }

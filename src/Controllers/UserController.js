@@ -103,7 +103,7 @@ var UserController = {
                
                 if(answer != null){
 
-                    const lastAnswer = answer[0].dt_consulta;
+                    const lastAnswer = answer[0].dt_consulta.toLocaleDateString().split('/').reverse().join('-');;
                     
                     if(lastAnswer === Data){
                         return res.status(200).send({
