@@ -32,7 +32,7 @@ var Auth = {
                 data.status_code = 200;
                 data.valid = true;
             }
-            console.log(data);
+            
             return data;
         });
         return data;
