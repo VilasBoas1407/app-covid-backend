@@ -3,9 +3,9 @@ const options = {
     connection: {
         host     : 'mysql669.umbler.com',
         port     : 41890,
-        user     : 'stop_covid',
+        user     : 'abraselstopcovid',
         password : 'Abrasel2020',
-        database : 'dt_stopcovid'
+        database : 'abraselstopcovid'
     }
 }
 
