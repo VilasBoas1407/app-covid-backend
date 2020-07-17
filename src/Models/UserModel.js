@@ -39,8 +39,15 @@ var UserModel = {
     },
     async putUsers(req,res){
         try{
+<<<<<<< HEAD
+           
             const { id } = req.params
             
+           
+=======
+            const { id } = req.params
+            
+>>>>>>> 54a12b9fef9100c8431ccd5197b91922e6cc6a5f
             await knex('tb_usuario')
             .update( req.body )
             .where(req.query)
