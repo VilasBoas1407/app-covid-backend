@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "'echo\\'error:\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[E\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C no test specified\\' && exit 1'",
-    "start": "nodemon src/index.js",
+    "start": "node src/index.js",
     "dev": "nodemon --inspect src/index.js"
   },
   "author": "",
