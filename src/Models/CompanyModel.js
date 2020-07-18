@@ -7,7 +7,7 @@ var CompanyModel = {
             var users = {};
 
             await knex('tb_empresa')
-            .select('id_emp', 'ds_nome','ds_cnpj','ds_email','dt_cadastro', 'ds_telefone')
+            .select('id_emp', 'ds_nome','ds_email','dt_cadastro', 'ds_telefone').orderBy('ds_nome','desc')
             .then(function(res){
                 if(res.length >= 1)
                     users = res;
