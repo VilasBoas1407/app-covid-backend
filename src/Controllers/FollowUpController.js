@@ -43,7 +43,8 @@ var FollowUpController = {
             var token = req.headers['x-access-token'];
             
             var auth = await Auth.validateToken(token);
-            const followUp = req.body.followUp;
+            let followUp = req.body.followUp;
+            followUp.dt_consulta = new Date().toLocaleDateString().split('/').reverse().join('-');
 
             if(auth.valid){
                 const status = await FollowModel.postFollowUp(followUp);
