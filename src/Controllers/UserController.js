@@ -81,7 +81,29 @@ var UserController = {
     async PutUsers(req,res) {
         try{
 
-            return null;
+            var token = req.headers['x-access-token'];
+            
+            var auth = await Auth.validateToken(token);
+            
+            if(auth.valid){
+                const user = await UserModel.putUsers(req,res);
+                
+                if(user != null){
+                      return res.status(200).send({
+                        'userData': user,
+                        });
+                }
+                else{
+                    return res.status(200).send({
+                        'message':'Não foi possivel atualizar os dados!'
+                    });
+                }
+            }
+            else{
+                return res.status(auth.status_code).send({
+                    'message': auth.message
+                });
+            }
         }
         catch(err){
             return res.status(500).send({

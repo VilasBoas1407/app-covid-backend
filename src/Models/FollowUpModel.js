@@ -26,6 +26,7 @@ var FollowUpModel = {
     },
     async postFollowUp(followup){
         try{
+            
             var valid = false
             await knex('tb_acompanhamento').insert(
                 followup

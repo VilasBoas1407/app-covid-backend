@@ -1,8 +1,9 @@
 var FollowModel = require('../Models/FollowUpModel');
 var Auth = require('../Utils/Auth');
+const UserModel = require('../Models/UserModel');
 
 var FollowUpController = {
-
+    
     async GetFollowUp(req,res) {
 
         try{
@@ -40,14 +41,21 @@ var FollowUpController = {
     async PostFollowUp(req,res) {
 
         try{
+   
             var token = req.headers['x-access-token'];
             
             var auth = await Auth.validateToken(token);
-            let followUp = req.body.followUp;
+            let followUp = req.body;
             followUp.dt_consulta = new Date().toLocaleDateString().split('/').reverse().join('-');
-
+           
+            
             if(auth.valid){
                 const status = await FollowModel.postFollowUp(followUp);
+                //atualiza a data do ultimo followup
+                let atualiza = req
+                atualiza.body.ds_last_followup =  new Date().toLocaleDateString().split('/').reverse().join('-');
+                const put = await UserModel.putUsers(atualiza,res);
+                
                 if(status){
                     return res.status(200).send({
                         'valid' : true,

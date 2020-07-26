@@ -9,7 +9,7 @@ var UserModel = {
 
             await knex('tb_usuario')
             .where(req.query)
-            .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone')
+            .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone', 'ds_last_followup')
             .then(function(res){
                 if(res.length >= 1)
                     users = res;
@@ -41,8 +41,7 @@ var UserModel = {
         try{
            
             const { id } = req.params
-            
-           
+
             await knex('tb_usuario')
             .update( req.body )
             .where(req.query)
