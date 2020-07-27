@@ -52,8 +52,13 @@ var FollowUpController = {
             if(auth.valid){
                 const status = await FollowModel.postFollowUp(followUp);
                 //atualiza a data do ultimo followup
-                let atualiza = req
-                atualiza.body.ds_last_followup =  new Date().toLocaleDateString().split('/').reverse().join('-');
+                let atualiza={}
+                atualiza.query = req.query
+                atualiza.body = {
+                    ds_last_followup: new Date().toLocaleDateString().split('/').reverse().join('-')
+                }
+                //atualiza.body.ds_last_followup =  new Date().toLocaleDateString().split('/').reverse().join('-');
+
                 const put = await UserModel.putUsers(atualiza,res);
                 
                 if(status){

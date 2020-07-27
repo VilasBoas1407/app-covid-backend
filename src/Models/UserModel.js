@@ -39,14 +39,16 @@ var UserModel = {
     },
     async putUsers(req,res){
         try{
-           
-            const { id } = req.params
-
-            await knex('tb_usuario')
-            .update( req.body )
-            .where(req.query)
-
+            
+            if(req.query.id_usuario){
+                await knex('tb_usuario')
+                .update( req.body )
+                .where(req.query)
+                
             return res.send()
+            }else{
+                throw error
+            }
         } catch (error){
             throw error
         }
