@@ -15,6 +15,7 @@ routes.get('/users',UserController.GetUsers);
 routes.post('/users',UserController.PostUsers);
 routes.put('/users',UserController.PutUsers);
 routes.get('/lastAnswer',UserController.getLastAnswer);
+routes.get('/whoAnswer',UserController.GetWhoAnswered);
 
 routes.get('/companies',CompanyController.GetCompany);
 routes.post('/companies',CompanyController.PostCompany);

@@ -51,6 +51,32 @@ var UserModel = {
             throw error
         }
     },
+    async getWhoAnswered(req,res){
+            try{
+                let date = new Date()
+    
+                date.setDate(date.getDate());
+                date = date.toLocaleDateString().split('/').reverse().join('-')
+                
+                var users = {};
+    
+                await knex('tb_usuario')
+                .where(req.query).whereNot('ds_last_followup', date)
+                .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone', 'ds_last_followup')
+                .then(function(res){
+                    if(res.length >= 1)
+                        users = res;
+                    else
+                        users = null;
+                });
+                
+                return users;
+            }
+            catch(ex){
+                throw ex;
+            }
+
+    },
     async validEmail(ds_email){
         try{
             var email = {};

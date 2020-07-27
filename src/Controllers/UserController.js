@@ -1,5 +1,6 @@
 var UserModel = require('../Models/UserModel');
 var Auth = require('../Utils/Auth');
+const { getWhoAnswered } = require('../Models/UserModel');
 
 
 var UserController = {
@@ -142,6 +143,40 @@ var UserController = {
                 else{
                     return res.status(200).send({
                         'valid': true
+                    });
+                }
+            }
+            else{
+                return res.status(auth.status_code).send({
+                    'message': auth.message
+                });
+            }
+
+        }
+        catch(err){
+            return res.status(500).send({
+                'error' : err
+            });
+        }
+    }, 
+    async GetWhoAnswered(req,res) {
+        
+        try{
+            var token = req.headers['x-access-token'];
+            
+            var auth = await Auth.validateToken(token);
+            
+            if(auth.valid){
+                const user = await UserModel.getWhoAnswered(req,res);
+                
+                if(user != null){
+                      return res.status(200).send({
+                        'userData': user,
+                        });
+                }
+                else{
+                    return res.status(200).send({
+                        'message':'todos os funcionarios responderam!'
                     });
                 }
             }
