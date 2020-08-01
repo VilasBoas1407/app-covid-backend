@@ -9,7 +9,7 @@ var UserModel = {
 
             await knex('tb_usuario')
             .where(req.query)
-            .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone', 'ds_last_followup')
+            .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone', 'ds_last_followup').orderBy('ds_nome','asc')
             .then(function(res){
                 if(res.length >= 1)
                     users = res;
