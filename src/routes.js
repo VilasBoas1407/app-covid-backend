@@ -23,6 +23,7 @@ routes.put('/companies',CompanyController.PutCompany);
 
 routes.get('/followup',FollowUpController.GetFollowUp);
 routes.post('/followup',FollowUpController.PostFollowUp);
+routes.get('/followupDate',FollowUpController.GetFollowUpDate);
 
 routes.get('/symptoms',SymptomsController.getSymptoms);
 

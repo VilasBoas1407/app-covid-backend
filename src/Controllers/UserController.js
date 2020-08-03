@@ -168,14 +168,15 @@ var UserController = {
             
             if(auth.valid){
                 const user = await UserModel.getWhoAnswered(req,res);
-                
+    
                 if(user != null){
                       return res.status(200).send({
-                        'userData': user,
+                        'userData': user
                         });
                 }
                 else{
                     return res.status(200).send({
+                        'quantidade':0,
                         'message':'todos os funcionarios responderam!'
                     });
                 }
