@@ -9,7 +9,7 @@ var UserModel = {
 
             await knex('tb_usuario')
             .where(req.query)
-            .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone')
+            .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone', 'ds_last_followup').orderBy('ds_nome','asc')
             .then(function(res){
                 if(res.length >= 1)
                     users = res;
@@ -39,18 +39,45 @@ var UserModel = {
     },
     async putUsers(req,res){
         try{
-           
-            const { id } = req.params
             
-           
-            await knex('tb_usuario')
-            .update( req.body )
-            .where(req.query)
-
+            if(req.query.id_usuario){
+                await knex('tb_usuario')
+                .update( req.body )
+                .where(req.query)
+                
             return res.send()
+            }else{
+                throw error
+            }
         } catch (error){
             throw error
         }
+    },
+    async getWhoAnswered(req,res){
+            try{
+                let date = new Date()
+    
+                date.setDate(date.getDate());
+                date = date.toLocaleDateString().split('/').reverse().join('-')
+                
+                var users = {};
+    
+                await knex('tb_usuario')
+                .where(req.query).whereNot('ds_last_followup', date)
+                .select('id_usuario','id_emp', 'ds_nome','ds_cpf','ds_email','dt_cadastro', 'ds_telefone', 'ds_last_followup')
+                .then(function(res){
+                    if(res.length >= 1)
+                        users = res;
+                    else
+                        users = null;
+                });
+                
+                return users;
+            }
+            catch(ex){
+                throw ex;
+            }
+
     },
     async validEmail(ds_email){
         try{

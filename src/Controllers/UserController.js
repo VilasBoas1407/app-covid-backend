@@ -1,5 +1,6 @@
 var UserModel = require('../Models/UserModel');
 var Auth = require('../Utils/Auth');
+const { getWhoAnswered } = require('../Models/UserModel');
 
 
 var UserController = {
@@ -81,7 +82,29 @@ var UserController = {
     async PutUsers(req,res) {
         try{
 
-            return null;
+            var token = req.headers['x-access-token'];
+            
+            var auth = await Auth.validateToken(token);
+            
+            if(auth.valid){
+                const user = await UserModel.putUsers(req,res);
+                
+                if(user != null){
+                      return res.status(200).send({
+                        'userData': user,
+                        });
+                }
+                else{
+                    return res.status(200).send({
+                        'message':'Não foi possivel atualizar os dados!'
+                    });
+                }
+            }
+            else{
+                return res.status(auth.status_code).send({
+                    'message': auth.message
+                });
+            }
         }
         catch(err){
             return res.status(500).send({
@@ -120,6 +143,41 @@ var UserController = {
                 else{
                     return res.status(200).send({
                         'valid': true
+                    });
+                }
+            }
+            else{
+                return res.status(auth.status_code).send({
+                    'message': auth.message
+                });
+            }
+
+        }
+        catch(err){
+            return res.status(500).send({
+                'error' : err
+            });
+        }
+    }, 
+    async GetWhoAnswered(req,res) {
+        
+        try{
+            var token = req.headers['x-access-token'];
+            
+            var auth = await Auth.validateToken(token);
+            
+            if(auth.valid){
+                const user = await UserModel.getWhoAnswered(req,res);
+    
+                if(user != null){
+                      return res.status(200).send({
+                        'userData': user
+                        });
+                }
+                else{
+                    return res.status(200).send({
+                        'quantidade':0,
+                        'message':'todos os funcionarios responderam!'
                     });
                 }
             }
