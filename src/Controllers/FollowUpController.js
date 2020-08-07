@@ -45,7 +45,7 @@ var FollowUpController = {
             var token = req.headers['x-access-token'];
             
             var auth = await Auth.validateToken(token);
-            let followUp = req.body;
+            let followUp = req.body.followUp;
             followUp.dt_consulta = new Date().toLocaleDateString().split('/').reverse().join('-');
            
             
@@ -53,13 +53,13 @@ var FollowUpController = {
                 const status = await FollowModel.postFollowUp(followUp);
                 //atualiza a data do ultimo followup
                 let atualiza={}
-                atualiza.query = req.query
-                atualiza.body = {
-                    ds_last_followup: new Date().toLocaleDateString().split('/').reverse().join('-')
-                }
-                //atualiza.body.ds_last_followup =  new Date().toLocaleDateString().split('/').reverse().join('-');
 
-                const put = await UserModel.putUsers(atualiza,res);
+                atualiza.query = { id_usuario : req.body.followUp.id_usuario}
+                atualiza.body = {
+                    ds_last_followup : new Date().toLocaleDateString().split('/').reverse().join('-')
+                }
+
+                await UserModel.putUsers(atualiza);
                 
                 if(status){
                     return res.status(200).send({

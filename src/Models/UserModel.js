@@ -37,15 +37,16 @@ var UserModel = {
 
             return valid;
     },
-    async putUsers(req,res){
+    async putUsers(req){
         try{
             
             if(req.query.id_usuario){
                 await knex('tb_usuario')
                 .update( req.body )
                 .where(req.query)
-                
-            return res.send()
+                    
+                return true;
+
             }else{
                 throw error
             }
